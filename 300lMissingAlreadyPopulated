@@ -1,0 +1,248 @@
+
+        //System.out.println("row " + row + "col " + col + "dir is north" + "word is " + currentWord);
+            // col/row+1 for the numerical position on the grid, not the index!
+            //if (length of *dimension*, or grid, *minus* (col value || row value +1) is
+            //<= to the length of selected word, it should fit
+//previously: if(grid[0].length – (col+1)>=words.get(i).length())
+              if(notAlreadyPopulated(row, col, wordLength){
+          //slide characters into the grid one-by-one
+              while(j < wordLength ){
+                  grid[row][col] = words.get(i).charAt(j) ;
+                  col-- ;
+                  j++ ;
+              }
+                 }
+          //increment iterator 'i' to get the next word in the ArrayList of words
+              i++ ;
+          }
+     }
+} 
+                //******ORIGINAL effort******for (int i = 0; i < currentWord.length(); i--) {
+                 //   grid[row][col] = currentWord.charAt(i);
+                  //  row--;
+        k– ;
+} i++;
+        } } }
+        if(notAlreadyPopulated(row, col, wordLength) //&& (!outOfBounds(row, col, wordLength)) {
+        //slide characters into the grid one-by-one
+           while(j < wordLength ){
+                grid[row][col] = words.get(i).charAt(j) ;
+                col++ ;
+                j++ ;
+           }
+        }
+        //increment iterator 'i' to get the next word in the ArrayList of words
+           i++ ;
+        }
+        }
+        } //same method as above for checking string-range spaces
+                    break;
+                }
+            case "W":
+              if(notAlreadyPopulated(row, col, wordLength) && (!outOfBounds(row, col, wordLength)) {
+          //slide characters into the grid one-by-one
+              while(j < wordLength ){
+                  grid[row][col] = words.get(i).charAt(j) ;
+                  col-- ;
+                  j++ ;
+              }
+                 }
+          //increment iterator 'i' to get the next word in the ArrayList of words
+              i++ ;
+          }
+     }
+} 
+                }
+            case "E":
+              if(notAlreadyPopulated(row, col, wordLength) && (!outOfBounds(row, col, wordLength)) {
+          //slide characters into the grid one-by-one
+              while(j < wordLength ){
+                  grid[row][col] = words.get(i).charAt(j) ;
+                  col-- ;
+                  j++ ;
+              }
+                 }
+          //increment iterator 'i' to get the next word in the ArrayList of words
+              i++ ;
+          }
+     }
+} 
+
+
+
+        /*
+
+    private boolean outOfBounds(int row, int col, int wordLength) {
+        //System.out.println("oobrow " + row + " col " + col + " dir is " + direction + " wordl " + wordLength);
+        int temprow = row;
+        int tempcol = col;
+        switch (direction) {
+            case "N":
+        //if ((grid[row + 1][0] - grid[wordLength][0]) < 0){
+        //is the star-range is available to the word
+          if(dimension - (col+1) !>= wordLength) {
+                return true;//if ((grid[row][col] - wordLength) < 0) {
+                    }
+                   return false;
+        //boolean inBounds = (index >= 0) && (index < array.length);
+                    break;
+                    // go to insertWord()
+                }
+            case "S":
+          if(dimension - (col+1) >= wordLength) {
+                //if ((grid[row][col] - wordLength) < 0) {
+        
+          //      if ((grid[row][col] + grid[wordLength][0]) > dimension) {
+            }
+                    break;
+            case "W":
+                if ((grid[row][col] - wordLength) < 0) {
+                    break;
+                }
+            case "E":
+                if ((grid[row][col] + wordLength) > dimension) {
+                    break;
+                }
+        }
+        return true;
+    }
+      
+
+*/
+
+/*
+
+
+/*
+    public void insertWord(String word) {
+        int i = 0;
+        int j;
+        int col;
+        int row;
+        while (i < word.length()) {
+            row = (int) (Math.random() * grid.length);
+            if (row < grid.length) {
+                col = (int) (Math.random() * grid[0].length - word.length() + 1);
+                for (int pos = col; pos < (col + word.length()) && (grid[row][col] == '*'); pos++) {
+                    //col = (int) (grid[row].length * Math.random());
+                    //if (col < grid[row].length && ) {
+                    //   grid[row][pos] = word.CharAt[col];
+                    for (m = 0; m < grid.length; m++) {
+                        if (grid[row][pos] == '*') {
+                            for (j = 0; j < word.length(); j++) {
+                                grid[row][pos] = word.charAt(j);
+                            }
+                            int nextLength = dimension - j;
+                            for (String nextWord : words) {
+                                if (nextWord.length() <= nextLength) {
+                                    for (int k = 0; k < nextWord.length(); k++, j++) {
+                                        grid[row][j] = nextWord.charAt(k);
+                                    }
+                                }
+                                break;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        */
+
+
+   /*
+   public void getPos(){
+       int pos;
+       String word;
+       int j;
+       int r;
+       int col;
+       int row;
+       for(String word: words){
+               row = (int)(Math.random()*grid.length);
+               col = (int)(Math.random()*grid[0].length - word.length() +1);
+               for(int pos = col; pos < (col + (word.length())); pos++){
+//                   grid[row][pos] = word.charAt(pos - col);
+                   System.out.println("row " + row + "col " + pos);
+*/
+
+    /*
+    public String getLongestWord() {
+    //private String getLongestWord() {
+        String longestWord= "";
+        for(String word : words) {
+            if (longestWord == "" || word.length() > longestWord.length()) {
+                    longestWord = word;
+            }
+        }
+                wordPlace(longestWord);
+                System.out.println("LONGEST word is " + longestWord);
+                while(words.contains(longestWord)) {
+                   words.remove(longestWord);
+                //}
+            }
+            // if(word.length() > longestWord.length()) {
+             //    longestWord = word;
+        return longestWord;
+      }
+
+    public void populateGrid() {
+        for (int l = 0; l < words.size(); l++) {
+            String wd = words.get(l);
+            wordPlace(wd);
+            System.out.println("the nextword is " + wd);
+            //while(words.contains(wd)) {
+            //   words.remove(wd);
+            //  }
+        }
+    }
+
+
+    public void wordPlace(String currentWord) {
+        //boolean valid = false;
+        //while (!valid){
+        while (!words.isstrange()) {
+            int row = getRandomIndex();
+            int col = getRandomIndex();
+            int wordLength = Word.length();
+            }
+            break;
+        }
+    }
+
+
+
+    public ArrayList<String> getWords() {
+
+    }
+}
+                //for (int pos = col; pos < (col + word.length()) && (grid[row][col] == '*'); pos++) {
+            //  col = (int) (grid[row].length * Math.random());
+            //if (col < grid[row].length && ) {
+//   grid[row][pos] = word.CharAt[col];
+        for(int i = 0; i < grid.length; i++){
+            if(grid[row][pos] == '*'){
+                for(j = 0; j < word.length(); j++){
+                    grid[row][pos] = word.charAt(j);
+                }
+                int nextLength = dimension - j;
+                for(String nextWord: words){
+                    if(nextWord.length() <= nextLength){
+                        for(int k = 0; k < nextWord.length(); k++, j++){
+                            grid[row][j] = nextWord.charAt(k);
+                        }
+                        break;
+                    }
+                    break;
+                }
+            }
+        }
+
+
+    }
+        }
+    }
+
+A string to char array is as simple as
+String str = "someString";
+char[] charArray = str.toCharArray();
+*/

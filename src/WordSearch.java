@@ -19,7 +19,7 @@ public class WordSearch {
         dimension = getDimension();
         createGrid();
         printWords();
-        print = printAsString();
+        printAsString();
     }
 
     private ArrayList<String> readWords() throws Exception {
