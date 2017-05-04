@@ -6,11 +6,9 @@ public class Main {
         puzzle.printGrid();
         puzzle.printAsString();
         //puzzle.insertWord();
-        //puzzle.getLongestWord();
-        //puzzle.insertWord();
-        //puzzle.wordPlace();
-        //puzzle.printGrid();
+        puzzle.generateWordsearchpuzzle();
+        puzzle.printGrid();
 
     }
-}
+ }
 

@@ -17,9 +17,10 @@ public class WordSearch {
         words = readWords();
         //puzzle = this.puzzle;
         dimension = getDimension();
+        //generateWordsearchpuzzle();
         createGrid();
         printWords();
-        printAsString();
+        //printAsString();
     }
 
     private ArrayList<String> readWords() throws Exception {
@@ -32,7 +33,6 @@ public class WordSearch {
         bufReader.close();
         return listOfLines;
     }
-
 
     public void printAsString() throws Exception {
         StringBuilder lw = new StringBuilder();
@@ -86,20 +86,21 @@ private int getRandomDirection() {
     public void printWords() throws Exception {
            int i;
         for(i=0; i<words.size(); i++){ //Until i = size of words list
-            System.out.println(printAsString().get(i));//Print word at this position
         }
-//            System.out.println(printAsString());//Prints the puzzle as string
+            System.out.println(words.get(i-1));//Prints the puzzle as string
     }
 
 
-    private void generateWordsearchpuzzle();{
-        int i, j, k, l = 0, row=0, col=0 ;
-        int strange = 0;
+    public void generateWordsearchpuzzle(){
+        int i = 0,  l = 0, row = 0, col = 0 ;
+        int strange;
         int coltemp= col;
         int rowtemp= row;
         //stores temp value of col/row so that it can be used to check for empty spaces in loop
         int direction = getRandomDirection();
         //pick random number for direction and random coordinate with row and col
+
+            System.out.println(direction);//Prints the puzzle as string
 
         while(i < words.size()){//while “i” is less than the size of the list of words
             //direction of word in puzzle is chosen according to value of direction
@@ -119,8 +120,8 @@ private int getRandomDirection() {
                             strange  = words.get(i).length()+1;
                         }
                     }
-            // is the range of stars equal to the word length
-            if(strange == words.get(i).length()){
+            // is the range of stars equal to the length of the word
+            if(strange <= words.get(i).length()){
                int j = 0 ; //put in the characters of the current word one at a time
                     while( j < words.get(i).length() ){
                          grid[row][col] = words.get(i).charAt(j) ;
@@ -141,25 +142,22 @@ private int getRandomDirection() {
                              strange = words.get(i).length()+1;
                         }
                     }
-                    if( strange == words.get(i).length()) {
-                     //same as above except we are putting characters in the word backwards
-                        k = words.get(i).length()-1;
+                    if( strange == words.get(i).length()) { //same as above except we are putting characters in the word backwards
+                        int k = words.get(i).length()-1;
                         while( k >= 0 ){
                             grid[row][col] = words.get(i).charAt(k);
                             col--;
                             //
                             k--;
-                        }
-                       // move onto next word
+                        } // move onto next word
                         i++ ;
                     }
                 }
 
-            }else if(direction == 2)
-            {//same as above except with changing rows
+            }else if(direction == 2) {//same as above except with changing rows
 //so the chosen words will be put in in a north or south direction
                 if(grid[0].length - (row+1) >=words.get(i).length() && (Character.isLetter(grid[row][col])==false)) {
-                    for( strange = 0 ; strange  <words.get(i).length(); strange++) {
+                    for( strange = 0 ; strange  < words.get(i).length(); strange++) {
                         if((Character.isLetter(grid[rowtemp][col]))==false){
                             rowtemp++ ;
                         }else{
@@ -169,7 +167,7 @@ private int getRandomDirection() {
                     }
                     // this time were placing the word in backwards; bottom to top
                     if(strange == words.get(i).length()) {
-                        k = words.get(i).length() -1 ;
+                        int k = words.get(i).length() -1 ;
                         while(k >= 0 ){
                             grid[row][col] = words.get(i).charAt(k) ;
                             row--;
@@ -200,14 +198,14 @@ private int getRandomDirection() {
             }
         }
 
-        int a,j;
+        int a;
 //characters of alphabet in order of how they appear on the keyboard
         char[] alphabet = {('q'),('w'),('e'),('r'),('t'),('y'),('u'),('i'),('o'),('p'),('a'),('s'),('d'),('f'),('g'),('h'),('j'),('k'),('l'),('z'),('x'),('c'),('v'),('b'),('n'),('m')} ;
         for(i=0;i < words.size(); i++){
 //goes through the grid and if no character is in place it randomly adds one from the alphabet
             for(a=0; a<words.size(); a++)
             {
-                for(j=0; j<grid[0].length; j++)
+                for(int j=0; j<grid[0].length; j++)
                 {
                     if(Character.isLetter(grid[a][j])==false){
                         int z = (int)((Math.random()* alphabet.length));
