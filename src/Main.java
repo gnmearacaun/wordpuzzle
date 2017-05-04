@@ -5,7 +5,6 @@ public class Main {
 
         puzzle.printGrid();
         puzzle.printAsString();
-        //puzzle.insertWord();
         puzzle.generateWordsearchpuzzle();
         puzzle.printGrid();
 
