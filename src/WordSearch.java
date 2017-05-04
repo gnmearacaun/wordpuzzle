@@ -104,23 +104,25 @@ private int getRandomDirection() {
 
         while(i < words.size()){//while “i” is less than the size of the list of words
             //direction of word in puzzle is chosen according to value of direction
-            if(direction == 0) {
+            if(direction == 0) {   // I could use switch/case here also
             // col/row+1 is the actually pos of col/row in the grid
             //if length of the grid – col/row+1 is greater or equal to length of the word
             //and ensure there's enough room for the current word.
+                row = (int) (Math.random() * grid.length);
+                col = (int)(Math.random()*grid[0].length);
                 if(dimension - (col+1) >= words.get(i).length()) {
             //  check there are stars, not letters, for word placement
                     for(strange = 0 ; strange < words.get(i).length(); strange++){
             //if no letter is found we move on to check the next col to the right in this case
                         if((Character.isLetter(grid[row][coltemp]))==false){
-                            coltemp++ ;
+                            coltemp++;
                         }else{
-            //if not we set a value to strange that will break the loop so that will not
+            //if not we set a value to st-range that will break the loop so that will not
             //satisfy the next if statement because it exceeds the limits of the permitted word length
                             strange  = words.get(i).length()+1;
                         }
                     }
-            // is the range of stars equal to the length of the word
+            // is the range of stars equal to the length of the word?
             if(strange <= words.get(i).length()){
                int j = 0 ; //put in the characters of the current word one at a time
                     while( j < words.get(i).length() ){
