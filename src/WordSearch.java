@@ -97,19 +97,19 @@ private int getRandomDirection() {
         int coltemp= col;
         int rowtemp= row;
         //stores temp value of col/row so that it can be used to check for empty spaces in loop
-        int direction = getRandomDirection();
         //pick random number for direction and random coordinate with row and col
 
             System.out.println(direction);//Prints the puzzle as string
 
         while(i < words.size()){//while “i” is less than the size of the list of words
+            int direction = getRandomDirection();
+            row = (int) (Math.random() * grid.length);
+            col = (int)(Math.random()*grid[0].length);
             //direction of word in puzzle is chosen according to value of direction
             if(direction == 0) {   // I could use switch/case here also
             // col/row+1 is the actually pos of col/row in the grid
             //if length of the grid – col/row+1 is greater or equal to length of the word
             //and ensure there's enough room for the current word.
-                row = (int) (Math.random() * grid.length);
-                col = (int)(Math.random()*grid[0].length);
                 if(dimension - (col+1) >= words.get(i).length()) {
             //  check there are stars, not letters, for word placement
                     for(strange = 0 ; strange < words.get(i).length(); strange++){
