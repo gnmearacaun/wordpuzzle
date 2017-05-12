@@ -92,7 +92,7 @@ private int getRandomDirection() {
 
 
     public void generateWordsearchpuzzle(){
-        int i = 0,  l = 0, row = 0, col = 0 ;
+        int i = 0,  l = 0, row, col;
         int strange;
         //stores temp value of col/row so that it can be used to check for empty spaces in loop
         //pick random number for direction and random coordinate with row and col
@@ -101,74 +101,81 @@ private int getRandomDirection() {
         while(i < words.size()){//while “i” is less than the size of the list of words
             int direction = getRandomDirection();
             row = (int) (Math.random() * grid.length);
-            col = (int)(Math.random()*grid[0].length);
+            col = (int)(Math.random() * grid[0].length);
             int coltemp= col;
             int rowtemp= row;
             String currentW = words.get(i);
             int wordLength = words.get(i).length();
+            System.out.println("currentW " + currentW);
+            //System.out.println(wordLength);
             System.out.println(direction);
             System.out.println(row);
             System.out.println(col);
-            System.out.println(wordLength);
-            System.out.println("currentW " + currentW);
 
-            //direction of word in puzzle is chosen according to value of direction
-            if(direction == 0) {   // I could use switch/case here also
-            // col/row+1 is the actually pos of col/row in the grid
-            //if length of the grid – col/row+1 is greater or equal to length of the word
-            //and ensure there's enough room for the current word.
-                if(dimension - (col+1) >= wordLength) {
-            //  check there are stars, not letters, for word placement
+            //direction of word in puzzle is chosen according to value of 1-4
+            if(direction == 1) {   // I could have used switch/case for the direction values, but went with if/else instead
+            //Is the length of the grid – col/row+1 greater or equal to length of the word?
+                    if((grid.length - (col+1)) >= wordLength) {
+                    // Col+1/row+1 adjusts for the index +1
+            //ensure there's enough room for the current word.
+            //  check the range of necessary spaces to ensure they are not letters (but stars) to place the current word
                     for(strange = 0 ; strange < wordLength; strange++){
-            //if no letter is found we move on to check the next col to the right in this case
-                        if((Character.isLetter(grid[row][coltemp]))==false){
+                        if((!Character.isLetter(grid[row][coltemp]))){
+                            //if no letter is found we move on to check the next col to the right in this instance
                             coltemp++;
                         }else{
-            //if not we set a value to st-range that will break the loop so that will not
-            //satisfy the next if statement because it exceeds the limits of the permitted word length
+            //if we come across a letter, we set a value to strange that will break the for-loop and not
+            //satisfy the next iteration because there's not enough space for the word. It will go back and get new random
+                            //values for positions and the direction
                             strange  = wordLength +1;
                         }
                     }
-            // is the range of stars equal to the length of the word?
-            if(strange <= wordLength){
-               int j = 0 ; //put the characters in, one at a time,
+            // Checking: is the range of stars equal to the length of the word?
+            if(strange == wordLength){
+               int j = 0 ; // if so put the characters in one at a time,
                     while( j < wordLength){
-                         grid[row][col] = words.get(i).charAt(j); //put the character at position j from word at
-                        // postiton i of the array into the actual position (ie col vs. coltemp)
+                         grid[row][col] = words.get(i).charAt(j); //put the character at position j of the word i
+                        // (out of the arrayList called words) into the actual position (ie col, not coltemp)
                          col++ ;  // jump to the next column right
                          j++ ; // increment our letter count until it reaches the limit of the word
                     }
-// i increments to the next word in the array when we're done with inserting with prior nested loop
+// i increments to the next word in the array when we're done with inserting via prior nested loop
                         i++ ;
                     }
                 }
-            } //same method as in direction '0', checking empty spaces
-            else if(direction == 1){
-                if(words.size() - (col+1)>= wordLength) {
+            } //same plan as in direction '1', but putting the word in backwards
+            else if(direction == 2){
+                if((grid.length - (col+1)) >= wordLength) {
                     for(strange  = 0 ;strange < wordLength; strange++){
-                        if((Character.isLetter(grid[row][coltemp]))==false){
+                        if((!Character.isLetter(grid[row][coltemp]))){
                             coltemp++ ;
                         }else{
                              strange = wordLength+1;
                         }
                     }
-                    if( strange == wordLength) { //we're giving k the value of the wordlength -0 to adjust for the indexing
+                    if( strange == wordLength) { //I might try giving k the value of the wordlength -1 to adjust for the indexing
                         //the characters in the word backwards, right to left
                         int k = wordLength -1;
+                        //wordlength -1 to adjust for the fact that we want the index of the first letter to start at 0
+						//just like k
                         while( k >= 0 ){
+                            //Starting at the end of the word
+							//get the letter at k position and place it in the grid
                             grid[row][col] = words.get(i).charAt(k);
+                            //move from right to left
                             col--;
+                            //move from rightmost letter to the left
                             k--;
                         } // move onto next word
                         i++ ;
                     }
                 }
 
-            }else if(direction == 2) {//same as above except with changing rows
-//so the chosen words will be put in in a north or south direction
-                if(grid[0].length - (row+1) >=wordLength && (Character.isLetter(grid[row][col])==false)) {
+            }else if(direction == 3) {//same as above except the chosen words will be put in from south to north direction
+                if(grid[0].length - (row+1) >= wordLength) {
+                    //if(grid[0].length - (row+1) >=wordLength && (!Character.isLetter(grid[row][col]))) {
                     for( strange = 0 ; strange  < wordLength; strange++) {
-                        if((Character.isLetter(grid[rowtemp][col]))==false){
+                        if((!Character.isLetter(grid[rowtemp][col]))){
                             rowtemp++;
                         }else{
                              strange = wordLength+1 ;
@@ -180,17 +187,17 @@ private int getRandomDirection() {
                         int k = wordLength -1 ;
                         while(k >= 0 ){
                             grid[row][col] = words.get(i).charAt(k) ;
-                            row++;
+                            row--;
                             k--;
                         }
                         i++;
                     }
                 }
             }
-            else if(direction == 3) {//similiar to above except now the word is inserted top to bottom
+            else if(direction == 4) {//similar to above except now the word is inserted top to bottom
                 if(grid[0].length - (row+1) >= wordLength ) {
                     for(strange = 0 ; strange <wordLength; strange++){
-                        if((Character.isLetter(grid[rowtemp][col])) == false ){
+                        if((!Character.isLetter(grid[rowtemp][col]))){
                             rowtemp++ ;
                         }else{
                              strange = wordLength+1;
@@ -217,7 +224,7 @@ private int getRandomDirection() {
             {
                 for(int b=0; b<grid[0].length; b++)
                 {
-                    if(Character.isLetter(grid[a][b])==false){
+                    if(Character.isLetter(grid[a][b])){
                         int z = (int)((Math.random()* alphabet.length));
                         grid[a][b] = alphabet[z] ;
                     }
