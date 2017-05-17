@@ -24,7 +24,7 @@ public class WordSearch {
     }
 
     private ArrayList<String> readWords() throws Exception {
-        BufferedReader bufReader = new BufferedReader(new FileReader("toddlist.txt"));
+        BufferedReader bufReader = new BufferedReader(new FileReader("20Awords.txt"));
         ArrayList<String> listOfLines = new ArrayList<>();
         String line;
         while ((line = bufReader.readLine()) != null) {
@@ -106,6 +106,7 @@ private int getRandomDirection() {
             int rowtemp= row;
             String currentW = words.get(i);
             int wordLength = words.get(i).length();
+            //for debugging purposes, the following were getting hung up on an out of bounds exception
             //System.out.println("currentW " + currentW);
             //System.out.println(wordLength);
             //System.out.println(direction);
