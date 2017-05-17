@@ -106,11 +106,11 @@ private int getRandomDirection() {
             int rowtemp= row;
             String currentW = words.get(i);
             int wordLength = words.get(i).length();
-            //System.out.println("currentW " + currentW);
+            System.out.println("currentW " + currentW);
             //System.out.println(wordLength);
-            //System.out.println(direction);
-            //System.out.println(row);
-            //System.out.println(col);
+            System.out.println(direction);
+            System.out.println(row);
+            System.out.println(col);
 
             //direction of word in puzzle is chosen according to value of 1-4
             if(direction == 1) {   // I could have used switch/case for the direction values, but went with if/else instead
@@ -145,38 +145,38 @@ private int getRandomDirection() {
                 }
             } //same plan as in direction '1', but putting the word in backwards
             else if(direction == 2){
-                  if((col+1) >= wordLength) {
+                if((grid.length - (col+1)) >= wordLength) {
                     for(strange  = 0 ;strange < wordLength; strange++){
                         if((!Character.isLetter(grid[row][coltemp]))){
-                            coltemp--;
+                            coltemp++ ;
                         }else{
                              strange = wordLength+1;
                         }
                     }
                     if( strange == wordLength) { //I might try giving k the value of the wordlength -1 to adjust for the indexing
                         //the characters in the word backwards, right to left
-                        int k = 0;
+                        int k = wordLength -1;
                         //wordlength -1 to adjust for the fact that we want the index of the first letter to start at 0
-                        //just like k
-                        while( k <= wordLength -1 ){
+						//just like k
+                        while( k >= 0 ){
                             //Starting at the end of the word
-                            //get the letter at k position and place it in the grid
+							//get the letter at k position and place it in the grid
                             grid[row][col] = words.get(i).charAt(k);
                             //move from right to left
                             col--;
                             //move from rightmost letter to the left
-                            k++;
+                            k--;
                         } // move onto next word
                         i++ ;
                     }
                 }
 
             }else if(direction == 3) {//same as above except the chosen words will be put in from south to north direction
-                if((row+1) >= wordLength) {
+                if(grid[0].length - (row+1) >= wordLength) {
                     //if(grid[0].length - (row+1) >=wordLength && (!Character.isLetter(grid[row][col]))) {
                     for( strange = 0 ; strange  < wordLength; strange++) {
                         if((!Character.isLetter(grid[rowtemp][col]))){
-                            rowtemp--;
+                            rowtemp++;
                         }else{
                              strange = wordLength+1 ;
 
@@ -184,11 +184,11 @@ private int getRandomDirection() {
                     }
                     // this time were placing the word in backwards; bottom to top
                     if(strange == wordLength) {
-                        int k = 0;
-                        while(k <= wordLength -1 ){
+                        int k = wordLength -1 ;
+                        while(k >= 0 ){
                             grid[row][col] = words.get(i).charAt(k) ;
                             row--;
-                            k++;
+                            k--;
                         }
                         i++;
                     }
@@ -216,15 +216,15 @@ private int getRandomDirection() {
         }
 
         int a;
-          //characters of alphabet in order of how they appear on the keyboard
+//characters of alphabet in order of how they appear on the keyboard
         char[] alphabet = {('q'),('w'),('e'),('r'),('t'),('y'),('u'),('i'),('o'),('p'),('a'),('s'),('d'),('f'),('g'),('h'),('j'),('k'),('l'),('z'),('x'),('c'),('v'),('b'),('n'),('m')} ;
         for(i=0;i < words.size(); i++){
-         //goes through the grid and if no character is in place it randomly adds one from the alphabet
-            for(a=0; a<grid.length; a++)
+//goes through the grid and if no character is in place it randomly adds one from the alphabet
+            for(a=0; a<words.size(); a++)
             {
                 for(int b=0; b<grid[0].length; b++)
                 {
-                    if(!Character.isLetter(grid[a][b])){
+                    if(Character.isLetter(grid[a][b])){
                         int z = (int)((Math.random()* alphabet.length));
                         grid[a][b] = alphabet[z] ;
                     }
